@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pythagorean Calculator</title>
+<link rel="icon" type="image/x-icon" href="\PitaGlorus.jpg">
+<a href="st.html">Calculator</a>
+<a href="c2.html">Theorem</a>
+<hr>
+    
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  select,
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  #result {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+</style>
+<script src="pythagorean_calculator.js"></script>
+</head>
+<body>
+
+<h1>Pythagorean Calculator</h1>
+
+<label for="operation">Select operation:</label>
+<select id="operation" onchange="handleOperationChange()">
+  <option value="none">Select option</option>
+  <option value="a">Find side 'a'</option>
+  <option value="b">Find side 'b'</option>
+  <option value="c">Find side 'c'</option>
+</select>
+
+<br><br>
+
+<label for="inputA">Side 'a':</label>
+<input type="number" id="inputA" step="any" >
+
+<label for="inputB">Side 'b':</label>
+<input type="number" id="inputB" step="any" >
+
+<label for="inputC">Side 'c':</label>
+<input type="number" id="inputC" step="any" >
+
+<br><br>
+
+<button onclick="calculate()">Calculate</button>
+
+<p id="result"></p>
+
+<script>
+function handleOperationChange() {
+    const operation = document.getElementById("operation").value;
+    const inputA = document.getElementById("inputA");
+    const inputB = document.getElementById("inputB");
+    const inputC = document.getElementById("inputC");
+  
+    inputA.disabled = false;
+    inputB.disabled = false;
+    inputC.disabled = false;
+  
+    if (operation === "a") {
+      inputA.disabled = true;
+    } else if (operation === "b") {
+      inputB.disabled = true;
+    } else if (operation === "c") {
+      inputC.disabled = true;
+    }
+  }
+  
+  function calculate() {
+    const operation = document.getElementById("operation").value;
+    const inputA = parseFloat(document.getElementById("inputA").value);
+    const inputB = parseFloat(document.getElementById("inputB").value);
+    const inputC = parseFloat(document.getElementById("inputC").value);
+    
+    let result;
+  
+    if (operation === "a") {
+      result = Math.sqrt(inputC * inputC - inputB * inputB);
+    } else if (operation === "b") {
+      result = Math.sqrt(inputC * inputC - inputA * inputA);
+    } else if (operation === "c") {
+      result = Math.sqrt(inputA * inputA + inputB * inputB);
+    } else {
+      result = "Invalid operation";
+    }
+  
+    if (!isNaN(result)) {
+      document.getElementById("result").textContent = `Result: ${result.toFixed(2)}`;
+    } else {
+      document.getElementById("result").textContent = "Invalid input";
+    }
+  }
+    </script>
+
+    </body>
+
+</html>
